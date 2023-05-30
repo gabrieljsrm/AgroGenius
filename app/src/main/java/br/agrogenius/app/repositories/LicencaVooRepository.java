@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import br.agrogenius.app.models.LicencaVoo;
 
+
+
 @Repository
 public interface LicencaVooRepository extends JpaRepository<LicencaVoo, Long> {
 
