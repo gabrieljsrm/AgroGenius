@@ -16,16 +16,16 @@ public class Telemetria {
 	@NotNull(message = "O Drone é obrigatório!")
 	private Long droneId;
 	
-	@NotNull(message = "O Drone é obrigatório!")
+	@NotNull(message = "A Latitude é obrigatório!")
 	private Long latitude;
 	
-	@NotNull(message = "O Drone é obrigatório!")
+	@NotNull(message = "A Longitude é obrigatório!")
 	private Long longitude;
 	
-	@NotNull(message = "O Drone é obrigatório!")
+	@NotNull(message = "A velocidade é obrigatório!")
 	private Long velocidade;
 	
-	@NotNull(message = "O Drone é obrigatório!")
+	@NotNull(message = "A direcao é obrigatório!")
 	private Long direcao;
 	
 	private LocalDateTime dataHora;
