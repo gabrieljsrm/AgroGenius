@@ -2,12 +2,13 @@ package br.agrogenius.app.models;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
-
+@Entity
 public class LicencaVoo {
 	
 	@Id // primary key
@@ -55,7 +56,5 @@ public class LicencaVoo {
 		this.dataValidade = dataValidade;
 	}
 
-
-
-
+	
 }
