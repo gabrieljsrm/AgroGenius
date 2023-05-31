@@ -68,46 +68,46 @@ input[type="submit"] {
 		</div>
 	</nav>
 	<div class="container mt-5">
-		<h2 class="text-center">Editar Drone</h2>
-		<form th:action="@{/drone/edit/{id}(id=${drone.id})}" method="post"
-			onsubmit="return validarForm()" th:object="${drone}">
+		<h2 class="text-center">Editar Telemetria</h2>
+		<form th:action="@{/telemetria/edit/{id}(id=${telemetria.id})}"
+			method="post" onsubmit="return validarForm()"
+			th:object="${telemetria}">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token != null ? _csrf.token : ''}" />
 			<div class="mb-3">
-				<label for="modelo">Modelo do Drone:</label> <input type="text"
-					class="form-control" name="modelo" id="modelo" required
-					th:value="${drone.modelo}" />
-			</div>
-			<div class="mb-3">
-				<label for="numeroSerie">Número de Série:</label> <input type="text"
-					class="form-control" name="numeroSerie" id="numeroSerie" required
-					th:value="${drone.numeroSerie}" />
-			</div>
-			<div class="mb-3">
-				<label for="dataCompra">Data de Compra:</label> <input type="date"
-					class="form-control" name="dataCompra" id="dataCompra" required
-					th:value="${drone.dataCompra}" />
+				<label for="droneId">Drone:</label> <select class="form-control"
+					name="drone.id" id="droneId" required>
+					<option value="">--Selecione um Drone--</option>
+					<option th:each="drone : ${drones}" th:value="${drone.id}"
+						th:text="${drone.modelo}"
+						th:selected="${drone.id == telemetria.drone.id}"></option>
+				</select>
 
 			</div>
 			<div class="mb-3">
-				<label for="capacidadeBateria">Capacidade da Bateria:</label> <input
-					type="text" class="form-control" name="capacidadeBateria"
-					id="capacidadeBateria" required
-					th:value="${drone.capacidadeBateria}" />
+				<label for="dataHora">Data e Hora:</label> <input
+					type="datetime-local" class="form-control" name="dataHora"
+					id="dataHora" required th:value="${telemetria.dataHora}" />
 			</div>
 			<div class="mb-3">
-				<label for="capacidadeCarga">Capacidade de Carga:</label> <input
-					type="text" class="form-control" name="capacidadeCarga"
-					id="capacidadeCarga" required th:value="${drone.capacidadeCarga}" />
+				<label for="latitude">Latitude:</label> <input type="number"
+					step="0.000001" class="form-control" name="latitude" id="latitude"
+					required th:value="${telemetria.latitude}" />
 			</div>
 			<div class="mb-3">
-				<label for="licencaVooId">Licença de Voo:</label> <select
-					class="form-control" name="licencaVooId" id="licencaVooId" required>
-					<option value="">Selecione a Licença de Voo</option>
-					<option th:each="licenca : ${licencas}" th:value="${licenca.id}"
-						th:text="${licenca.licencavoo}"
-						th:selected="${licenca.id == drone.licencaVooId}"></option>
-				</select>
+				<label for="longitude">Longitude:</label> <input type="number"
+					step="0.000001" class="form-control" name="longitude"
+					id="longitude" required th:value="${telemetria.longitude}" />
+			</div>
+			<div class="mb-3">
+				<label for="velocidade">Velocidade:</label> <input type="number"
+					class="form-control" name="velocidade" id="velocidade" required
+					th:value="${telemetria.velocidade}" />
+			</div>
+			<div class="mb-3">
+				<label for="direcao">Direção:</label> <input type="text"
+					class="form-control" name="direcao" id="direcao" required
+					th:value="${telemetria.direcao}" />
 			</div>
 			<button type="submit" class="btn btn-primary">Salvar</button>
 		</form>
@@ -115,16 +115,15 @@ input[type="submit"] {
 
 	<script>
 		function validarForm() {
-			var modelo = document.getElementById("modelo").value;
-			var numeroSerie = document.getElementById("numeroSerie").value;
-			var dataCompra = document.getElementById("dataCompra").value;
-			var capacidadeBateria = document
-					.getElementById("capacidadeBateria").value;
-			var capacidadeCarga = document.getElementById("capacidadeCarga").value;
-			var licencaVooId = document.getElementById("licencaVooId").value;
+			var droneId = document.getElementById("droneId").value;
+			var dataHora = document.getElementById("dataHora").value;
+			var latitude = document.getElementById("latitude").value;
+			var longitude = document.getElementById("longitude").value;
+			var velocidade = document.getElementById("velocidade").value;
+			var direcao = document.getElementById("direcao").value;
 
-			if (!modelo || !numeroSerie || !dataCompra || !capacidadeBateria
-					|| !capacidadeCarga || !licencaVooId) {
+			if (!droneId || !dataHora || !latitude || !longitude || !velocidade
+					|| !direcao) {
 				alert("Todos os campos são obrigatórios!");
 				return false;
 			}

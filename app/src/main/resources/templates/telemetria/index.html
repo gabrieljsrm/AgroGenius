@@ -89,7 +89,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Drone ID</th>
+                        <th>Drone</th>
                         <th>Data/Hora</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
@@ -102,7 +102,7 @@
                 <tbody>
                     <tr th:each="telemetria : ${telemetrias}">
                         <td th:text="${telemetria.id}"></td>
-                        <td th:text="${telemetria.droneId}"></td>
+                        <td th:text="${telemetria.drone.modelo}"></td>
                         <td th:text="${telemetria.dataHora}"></td>
                         <td th:text="${telemetria.latitude}"></td>
                         <td th:text="${telemetria.longitude}"></td>

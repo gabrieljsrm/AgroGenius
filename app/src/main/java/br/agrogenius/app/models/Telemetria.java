@@ -6,30 +6,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Telemetria {
-	
+
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.AUTO) // auto increment
 	private Long id;
-	
-	@NotNull(message = "O Drone é obrigatório!")
-	private Long droneId;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "drone_id")
+	private Drone drone;
+
 	@NotNull(message = "A Latitude é obrigatório!")
 	private Long latitude;
-	
+
 	@NotNull(message = "A Longitude é obrigatório!")
 	private Long longitude;
-	
+
 	@NotNull(message = "A velocidade é obrigatório!")
 	private Long velocidade;
-	
+
 	@NotNull(message = "A direcao é obrigatório!")
 	private Long direcao;
-	
+
 	private LocalDateTime dataHora;
 
 	public Long getId() {
@@ -40,12 +43,12 @@ public class Telemetria {
 		this.id = id;
 	}
 
-	public Long getDroneId() {
-		return droneId;
+	public Drone getDrone() {
+		return drone;
 	}
 
-	public void setDroneId(Long droneId) {
-		this.droneId = droneId;
+	public void setDrone(Drone drone) {
+		this.drone = drone;
 	}
 
 	public Long getLatitude() {
@@ -86,5 +89,21 @@ public class Telemetria {
 
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
+	}
+
+	public Long getDroneId() {
+		if (drone != null) {
+			return drone.getId();
+		}
+		return null;
+	}
+
+	public void setDroneId(Long droneId) {
+		if (droneId != null) {
+			Drone drone = new Drone();
+			drone.setId(droneId);
+			this.drone = drone;
+		}
+
 	}
 }

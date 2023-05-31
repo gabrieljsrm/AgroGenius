@@ -48,17 +48,17 @@ public class TelemetriaController {
     }
 
     @PostMapping("/create")
-    public String createTelemetria(@Valid @ModelAttribute("telemetria") Telemetria telemetria, BindingResult result, @RequestParam("droneId") Long droneId) {
+    public String createTelemetria(@Valid @ModelAttribute("telemetria") Telemetria telemetria, BindingResult result) {
         if (result.hasErrors()) {
             return "telemetria/create";
         }
 
-        Drone drone = droneRepository.getById(droneId);
+        Drone drone = droneRepository.getById(telemetria.getDrone().getId());
         if (drone == null) {
             return "telemetria/create";
         }
 
-        telemetria.setDroneId(droneId);
+        telemetria.setDrone(drone);
         telemetria.setDataHora(LocalDateTime.now());
         telemetriaRepository.save(telemetria);
         return "redirect:/telemetria";
@@ -81,18 +81,18 @@ public class TelemetriaController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editTelemetria(@PathVariable("id") Long id, @Valid @ModelAttribute("telemetria") Telemetria telemetriaAtualizada, BindingResult result, @RequestParam("droneId") Long droneId) {
+    public String editTelemetria(@PathVariable("id") Long id, @Valid @ModelAttribute("telemetria") Telemetria telemetriaAtualizada, BindingResult result) {
         if (result.hasErrors()) {
             return "telemetria/edit";
         }
 
-        Drone drone = droneRepository.getById(droneId);
+        Drone drone = droneRepository.getById(telemetriaAtualizada.getDrone().getId());
         if (drone == null) {
             return "telemetria/edit";
         }
 
         Telemetria telemetriaExistente = telemetriaRepository.getById(id);
-        telemetriaExistente.setDroneId(telemetriaAtualizada.getDroneId());
+        telemetriaExistente.setDrone(drone);
         telemetriaExistente.setLatitude(telemetriaAtualizada.getLatitude());
         telemetriaExistente.setLongitude(telemetriaAtualizada.getLongitude());
         telemetriaExistente.setVelocidade(telemetriaAtualizada.getVelocidade());
