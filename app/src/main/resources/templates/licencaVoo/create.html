@@ -52,24 +52,25 @@ input[type="submit"] {
 </head>
 
 <body>
-	 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Agrogenius</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/licencavoo">Cadastro Licença de Vôo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/drone">Cadastro Drone</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Agrogenius</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#mynavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/licencavoo">Cadastro
+							Licença de Vôo</a></li>
+					<li class="nav-item"><a class="nav-link" href="/drone">Cadastro
+							Drone</a></li>
+					<li class="nav-item"><a class="nav-link" href="/telemetria">Cadastro
+							Telemetria</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<div class="container mt-5">
 		<h2>Cadastrar Licença de Voo</h2>
 		<form action="/licencavoo/create" method="post">
@@ -91,19 +92,19 @@ input[type="submit"] {
 			<input type="submit" class="btn btn-primary" value="Salvar" />
 		</form>
 	</div>
-<script>
-	function validarForm() {
-		var licencavoo = document.getElementById("licencavoo").value;
-		var dataEmissao = document.getElementById("dataEmissao").value;
-		var dataValidade = document.getElementById("dataValidade").value;
+	<script>
+		function validarForm() {
+			var licencavoo = document.getElementById("licencavoo").value;
+			var dataEmissao = document.getElementById("dataEmissao").value;
+			var dataValidade = document.getElementById("dataValidade").value;
 
-		if (!licencavoo || !dataEmissao || !dataValidade) {
-			alert("Todos os campos são obrigatórios!");
-			return false;
+			if (!licencavoo || !dataEmissao || !dataValidade) {
+				alert("Todos os campos são obrigatórios!");
+				return false;
+			}
+			return true;
 		}
-		return true;
-	}
-</script>
+	</script>
 
 </body>
 

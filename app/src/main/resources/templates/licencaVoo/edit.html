@@ -50,24 +50,25 @@ input[type="submit"] {
 </style>
 </head>
 <body>
-	 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Agrogenius</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/licencavoo">Cadastro Licença de Vôo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/drone">Cadastro Drone</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Agrogenius</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#mynavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/licencavoo">Cadastro
+							Licença de Vôo</a></li>
+					<li class="nav-item"><a class="nav-link" href="/drone">Cadastro
+							Drone</a></li>
+					<li class="nav-item"><a class="nav-link" href="/telemetria">Cadastro
+							Telemetria</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<div class="container mt-5">
 		<h2 class="text-center">Editar sua Licença de Voo</h2>
 		<form th:action="@{/licencavoo/edit/{id}(id=${licenca.id})}"
@@ -75,21 +76,19 @@ input[type="submit"] {
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token != null ? _csrf.token : ''}" />
 			<div class="mb-3">
-				<label for="licencavoo">Número da Licença:</label> 
-				<input type="text" class="form-control"
-					name="licencavoo" id="licencavoo" required
-					th:value="${licenca.licencavoo}" />
+				<label for="licencavoo">Número da Licença:</label> <input
+					type="text" class="form-control" name="licencavoo" id="licencavoo"
+					required th:value="${licenca.licencavoo}" />
 			</div>
 			<div class="mb-3">
-				<label for="dataEmissao">Data de Emissão:</label> 
-				<input type="date" class="form-control" name="dataEmissao"
-					id="dataEmissao" required th:value="${licenca.dataEmissao}" />
+				<label for="dataEmissao">Data de Emissão:</label> <input type="date"
+					class="form-control" name="dataEmissao" id="dataEmissao" required
+					th:value="${licenca.dataEmissao}" />
 			</div>
 			<div class="mb-3">
-				<label for="dataValidade">Data de Validade:</label> 
-				<input type="date" class="form-control" name="dataValidade"
-					id="dataValidade" required
-					th:value="${licenca.dataValidade}" />
+				<label for="dataValidade">Data de Validade:</label> <input
+					type="date" class="form-control" name="dataValidade"
+					id="dataValidade" required th:value="${licenca.dataValidade}" />
 			</div>
 			<button type="submit" class="btn btn-primary">Salvar</button>
 		</form>
