@@ -86,8 +86,10 @@ input[type="submit"] {
 			</div>
 			<div class="mb-3">
 				<label for="dataHora">Data e Hora:</label>
-				<p th:text="${telemetria.dataHora}"></p>
+				<p
+					th:text="${#temporals.format(telemetria.dataHora, 'dd-MM-yyyy HH:mm')}"></p>
 			</div>
+
 
 			<div class="mb-3">
 				<label for="latitude">Latitude:</label> <input type="number"
