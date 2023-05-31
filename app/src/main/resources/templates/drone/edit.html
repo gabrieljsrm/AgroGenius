@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Editar Drone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+body {
+	background-color: #f5f5f5;
+}
+
+.navbar {
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+	font-weight: bold;
+}
+
+.nav-item:hover {
+	background-color: #343a40;
+}
+
+.nav-link:hover {
+	color: #f8f9fa;
+}
+
+h2 {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	text-align: center;
+	font-weight: bold;
+}
+
+form {
+	background-color: #ffffff;
+	padding: 2rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 1rem;
+}
+
+input[type="submit"] {
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Tourism on Mars Company</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#mynavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/licencavoo">Licenças
+							de Voo</a></li>
+				</ul>
+			</div>
+	</nav>
+	<div class="container mt-5">
+		<h2 class="text-center">Editar Drone</h2>
+		<form th:action="@{/drone/edit/{id}(id=${drone.id})}" method="post"
+			onsubmit="return validarForm()" th:object="${drone}">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token != null ? _csrf.token : ''}" />
+			<div class="mb-3">
+				<label for="modelo">Modelo do Drone:</label> <input type="text"
+					class="form-control" name="modelo" id="modelo" required
+					th:value="${drone.modelo}" />
+			</div>
+			<div class="mb-3">
+				<label for="numeroSerie">Número de Série:</label> <input type="text"
+					class="form-control" name="numeroSerie" id="numeroSerie" required
+					th:value="${drone.numeroSerie}" />
+			</div>
+			<div class="mb-3">
+				<label for="dataCompra">Data de Compra:</label> 
+				<input type="date" class="form-control" name="dataCompra" id="dataCompra" required
+					th:value="${drone.dataCompra}" />
+
+			</div>
+			<div class="mb-3">
+				<label for="capacidadeBateria">Capacidade da Bateria:</label> <input
+					type="text" class="form-control" name="capacidadeBateria"
+					id="capacidadeBateria" required
+					th:value="${drone.capacidadeBateria}" />
+			</div>
+			<div class="mb-3">
+				<label for="capacidadeCarga">Capacidade de Carga:</label> <input
+					type="text" class="form-control" name="capacidadeCarga"
+					id="capacidadeCarga" required th:value="${drone.capacidadeCarga}" />
+			</div>
+			<div class="mb-3">
+				<label for="licencaVooId">Licença de Voo:</label> <select
+					class="form-control" name="licencaVooId" id="licencaVooId" required>
+					<option value="">Selecione a Licença de Voo</option>
+					<option th:each="licenca : ${licencas}" th:value="${licenca.id}"
+						th:text="${licenca.licencavoo}"
+						th:selected="${licenca.id == drone.licencaVooId}"></option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Salvar</button>
+		</form>
+	</div>
+
+	<script>
+		function validarForm() {
+			var modelo = document.getElementById("modelo").value;
+			var numeroSerie = document.getElementById("numeroSerie").value;
+			var dataCompra = document.getElementById("dataCompra").value;
+			var capacidadeBateria = document
+					.getElementById("capacidadeBateria").value;
+			var capacidadeCarga = document.getElementById("capacidadeCarga").value;
+			var licencaVooId = document.getElementById("licencaVooId").value;
+
+			if (!modelo || !numeroSerie || !dataCompra || !capacidadeBateria
+					|| !capacidadeCarga || !licencaVooId) {
+				alert("Todos os campos são obrigatórios!");
+				return false;
+			}
+			return true;
+		}
+	</script>
+</body>
+</html>

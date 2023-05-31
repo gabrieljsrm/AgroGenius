@@ -2,6 +2,7 @@ package br.agrogenius.app.models;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,10 +12,10 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class LicencaVoo {
 	
-	@Id // primary key
-	@GeneratedValue(strategy = GenerationType.AUTO) // auto increment
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-			
+	
 	@NotNull(message = "O Número da Licença é obrigatório!")
 	private String licencavoo;
 	
@@ -23,7 +24,7 @@ public class LicencaVoo {
 	
 	@NotNull(message = "A Data de Validade é obrigatório!")
 	private LocalDate dataValidade;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +56,4 @@ public class LicencaVoo {
 	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
-
-	
 }
