@@ -87,7 +87,4 @@ public class Telemetria {
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
 	}
-	
-	
-
 }
