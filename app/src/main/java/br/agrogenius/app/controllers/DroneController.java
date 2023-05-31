@@ -77,7 +77,7 @@ public class DroneController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editDrone(@PathVariable("id") Long id, @Valid @ModelAttribute("drone") Drone droneAtualizado, BindingResult result) {
+    public String editDrone(@PathVariable("id") Long id, @Valid @ModelAttribute("drone") Drone droneAtualizado, BindingResult result, @RequestParam("licencaVooId") Long licencaVooId) {
         if (result.hasErrors()) {
             return "drone/edit";
         } else {
@@ -87,8 +87,14 @@ public class DroneController {
             droneExistente.setDataCompra(droneAtualizado.getDataCompra());
             droneExistente.setCapacidadeBateria(droneAtualizado.getCapacidadeBateria());
             droneExistente.setCapacidadeCarga(droneAtualizado.getCapacidadeCarga());
+            
+            // Atualiza a licença de voo do drone existente
+            LicencaVoo licencaVoo = licencaVooRepository.getById(licencaVooId);
+            droneExistente.setLicencaVoo(licencaVoo);
+            
             droneRepository.save(droneExistente);
             return "redirect:/drone";
         }
     }
+
 }

@@ -50,9 +50,24 @@ input[type="submit"] {
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-	<!-- Navegação removida por motivos de brevidade -->
-	</nav>
+	 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Agrogenius</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/licencavoo">Cadastro Licença de Vôo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/drone">Cadastro Drone</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 	<div class="container mt-5">
 		<h2 class="text-center">Editar sua Licença de Voo</h2>
 		<form th:action="@{/licencavoo/edit/{id}(id=${licenca.id})}"
