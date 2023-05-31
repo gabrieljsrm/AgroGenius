@@ -85,10 +85,10 @@ input[type="submit"] {
 
 			</div>
 			<div class="mb-3">
-				<label for="dataHora">Data e Hora:</label> <input
-					type="datetime-local" class="form-control" name="dataHora"
-					id="dataHora" required th:value="${telemetria.dataHora}" />
+				<label for="dataHora">Data e Hora:</label>
+				<p th:text="${telemetria.dataHora}"></p>
 			</div>
+
 			<div class="mb-3">
 				<label for="latitude">Latitude:</label> <input type="number"
 					step="0.000001" class="form-control" name="latitude" id="latitude"
@@ -116,14 +116,12 @@ input[type="submit"] {
 	<script>
 		function validarForm() {
 			var droneId = document.getElementById("droneId").value;
-			var dataHora = document.getElementById("dataHora").value;
 			var latitude = document.getElementById("latitude").value;
 			var longitude = document.getElementById("longitude").value;
 			var velocidade = document.getElementById("velocidade").value;
 			var direcao = document.getElementById("direcao").value;
 
-			if (!droneId || !dataHora || !latitude || !longitude || !velocidade
-					|| !direcao) {
+			if (!droneId || !latitude || !longitude || !velocidade || !direcao) {
 				alert("Todos os campos são obrigatórios!");
 				return false;
 			}

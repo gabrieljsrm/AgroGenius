@@ -59,10 +59,11 @@ public class TelemetriaController {
         }
 
         telemetria.setDrone(drone);
-        telemetria.setDataHora(LocalDateTime.now());
+        telemetria.setDataHora(LocalDateTime.now());  // Adição da data e hora atuais
         telemetriaRepository.save(telemetria);
         return "redirect:/telemetria";
     }
+
 
     @GetMapping("/delete/{id}")
     public String deleteTelemetria(@PathVariable("id") Long id) {
