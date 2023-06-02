@@ -76,7 +76,7 @@ input[type="submit"] {
     </nav>
 	<div class="container mt-5">
 		<h2>Cadastrar Drone</h2>
-		<form action="/drone/create" method="post">
+		<form action="/drone/create" method="post" onsubmit="return validarForm()">
 			<div class="mb-3">
 				<label for="modelo">Modelo:</label> <input type="text"
 					class="form-control" name="modelo" id="modelo" required />
@@ -86,7 +86,7 @@ input[type="submit"] {
 					class="form-control" name="dataCompra" id="dataCompra" required />
 			</div>
 			<div class="mb-3">
-				<label for="capacidadeBateria">Capacidade da Bateria:</label> <input
+				<label for="capacidadeBateria">Capacidade da Bateria em mAh:</label> <input
 					type="number" class="form-control" name="capacidadeBateria"
 					id="capacidadeBateria" required />
 			</div>
@@ -103,7 +103,7 @@ input[type="submit"] {
 				</select>
 			</div>
 			<div class="mb-3">
-				<label for="capacidadeCarga">Capacidade de Carga:</label> <input
+				<label for="capacidadeCarga">Capacidade de Carga em kg:</label> <input
 					type="number" class="form-control" name="capacidadeCarga"
 					id="capacidadeCarga" required />
 			</div>
@@ -112,22 +112,31 @@ input[type="submit"] {
 		</form>
 	</div>
 	<script>
-		function validarForm() {
-			var modelo = document.getElementById("modelo").value;
-			var dataCompra = document.getElementById("dataCompra").value;
-			var capacidadeBateria = document
-					.getElementById("capacidadeBateria").value;
-			var numeroSerie = document.getElementById("numeroSerie").value;
-			var licencaVooId = document.getElementById("licencaVooId").value;
-			var capacidadeCarga = document.getElementById("capacidadeCarga").value;
+    function validarForm() {
+        var modelo = document.getElementById("modelo").value;
+        var dataCompra = document.getElementById("dataCompra").value;
+        var capacidadeBateria = document.getElementById("capacidadeBateria").value;
+        var numeroSerie = document.getElementById("numeroSerie").value;
+        var licencaVooId = document.getElementById("licencaVooId").value;
+        var capacidadeCarga = document.getElementById("capacidadeCarga").value;
 
-			if (!modelo || !dataCompra || !capacidadeBateria || !numeroSerie
-					|| !licencaVooId || !capacidadeCarga) {
-				alert("Todos os campos são obrigatórios!");
-				return false;
-			}
-			return true;
-		}
-	</script>
+        if (!modelo || !dataCompra || !capacidadeBateria || !numeroSerie || !licencaVooId || !capacidadeCarga) {
+            alert("Todos os campos são obrigatórios!");
+            return false;
+        }
+
+        if (isNaN(capacidadeBateria) || capacidadeBateria <= 0) {
+            alert("A capacidade da bateria deve ser um número positivo!");
+            return false;
+        }
+
+        if (isNaN(capacidadeCarga) || capacidadeCarga <= 0) {
+            alert("A capacidade de carga deve ser um número positivo!");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 </body>
 </html>
