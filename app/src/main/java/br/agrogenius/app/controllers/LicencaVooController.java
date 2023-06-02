@@ -1,6 +1,5 @@
 package br.agrogenius.app.controllers;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,43 +11,48 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.agrogenius.app.models.Drone;
 import br.agrogenius.app.models.LicencaVoo;
+import br.agrogenius.app.repositories.DroneRepository;
 import br.agrogenius.app.repositories.LicencaVooRepository;
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/licencavoo")
 public class LicencaVooController {
 
-	@Autowired
-    private LicencaVooRepository licencaVooRepository; 
+    @Autowired
+    private LicencaVooRepository licencaVooRepository;
+
+    @Autowired
+    private DroneRepository droneRepository;
 
     @GetMapping("")
     public ModelAndView getLicencas() {
         ModelAndView model = new ModelAndView("licencavoo/index");
         List<LicencaVoo> listLicencaVoo = licencaVooRepository.findAll();
         model.addObject("licencas", listLicencaVoo);
-        return model; 
+        return model;
     }
-    
+
     @GetMapping("/usuario")
     public ModelAndView getLicencasUsuario() {
         ModelAndView model = new ModelAndView("licencavoo/usuario");
         List<LicencaVoo> listLicencaVoo = licencaVooRepository.findAll();
         model.addObject("licencas", listLicencaVoo);
-        return model; 
+        return model;
     }
 
     @GetMapping("/create")
     public ModelAndView createLicenca() {
         ModelAndView model = new ModelAndView("licencavoo/create");
-        return model; 
+        return model;
     }
 
     @PostMapping("/create")
-    public String createLicenca(@Valid @ModelAttribute("licenca") LicencaVoo licenca, BindingResult result) {
-        if(result.hasErrors()) {
+    public String createLicenca(@ModelAttribute("licenca") LicencaVoo licenca, BindingResult result) {
+        if (result.hasErrors()) {
             return "licencavoo/create";
         }
         licencaVooRepository.save(licenca);
@@ -56,7 +60,17 @@ public class LicencaVooController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteLicenca(@PathVariable("id") Long id) {
+    public String deleteLicenca(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        LicencaVoo licencaVoo = licencaVooRepository.findById(id).orElse(null);
+
+        // Verificar se a licença está sendo usada por algum drone
+        List<Drone> dronesComLicenca = droneRepository.findByLicencaVoo(licencaVoo);
+        if (!dronesComLicenca.isEmpty()) {
+            redirectAttributes.addFlashAttribute("mensagem", "Não é possível excluir a licença porque está sendo usada por um drone.");
+            return "redirect:/licencavoo";
+        }
+
+        // Se a licença não estiver sendo usada por nenhum drone, excluí-la
         licencaVooRepository.deleteById(id);
         return "redirect:/licencavoo";
     }
@@ -70,7 +84,7 @@ public class LicencaVooController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editLicenca(@PathVariable("id") Long id, @Valid @ModelAttribute("licenca") LicencaVoo licencaAtualizada, BindingResult result) {
+    public String editLicenca(@PathVariable("id") Long id, @ModelAttribute("licenca") LicencaVoo licencaAtualizada, BindingResult result) {
         if (result.hasErrors()) {
             return "licencavoo/edit";
         } else {
@@ -84,6 +98,4 @@ public class LicencaVooController {
         }
     }
 
-    }
-	
-
+}

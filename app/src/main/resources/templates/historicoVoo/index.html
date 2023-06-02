@@ -61,29 +61,26 @@ h3 {
 
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/adm">Agrogenius</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/licencavoo">Cadastro Licença de Vôo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/drone">Cadastro Drone</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/telemetria">Cadastro Telemetria</a>
-                    </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/historicoVoo">Cadastro Historico Voo</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/adm">Agrogenius</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#mynavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/licencavoo">Cadastro
+							Licença de Vôo</a></li>
+					<li class="nav-item"><a class="nav-link" href="/drone">Cadastro
+							Drone</a></li>
+					<li class="nav-item"><a class="nav-link" href="/telemetria">Cadastro
+							Telemetria</a></li>
+					<li class="nav-item"><a class="nav-link" href="/historicoVoo">Cadastro
+							Historico Voo</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
 	<div class="container-fluid">
 		<a type="button" class="btn btn-primary mt-3 mb-3"
@@ -121,7 +118,7 @@ h3 {
 							th:text="${#temporals.format(historicoVoo.dataDecolagem, 'dd-MM-yyyy')}"></td>
 						<td
 							th:text="${#temporals.format(historicoVoo.dataAterrisagem, 'dd-MM-yyyy')}"></td>
-						<td th:text="${historicoVoo.drone?.numeroSerie}"></td>
+						<td th:text="${historicoVoo.drone?.modelo}"></td>
 						<td><a
 							th:href="@{/historicoVoo/delete/{historicoVooId}(historicoVooId=${historicoVoo.id})}">Deletar</a></td>
 						<td><a
@@ -129,6 +126,9 @@ h3 {
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div th:if="${mensagem}" class="alert alert-danger mt-3" role="alert">
+			<p th:text="${mensagem}"></p>
 		</div>
 	</div>
 </body>
