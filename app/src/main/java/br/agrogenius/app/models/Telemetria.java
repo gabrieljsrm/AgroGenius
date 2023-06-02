@@ -22,10 +22,10 @@ public class Telemetria {
 	private Drone drone;
 
 	@NotNull(message = "A Latitude é obrigatório!")
-	private Long latitude;
+	private double latitude;
 
 	@NotNull(message = "A Longitude é obrigatório!")
-	private Long longitude;
+	private double longitude;
 
 	@NotNull(message = "A velocidade é obrigatório!")
 	private Long velocidade;
@@ -51,20 +51,20 @@ public class Telemetria {
 		this.drone = drone;
 	}
 
-	public Long getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Long latitude) {
-		this.latitude = latitude;
+	public void setLatitude(double d) {
+		this.latitude = d;
 	}
 
-	public Long getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Long longitude) {
-		this.longitude = longitude;
+	public void setLongitude(double d) {
+		this.longitude = d;
 	}
 
 	public Long getVelocidade() {
