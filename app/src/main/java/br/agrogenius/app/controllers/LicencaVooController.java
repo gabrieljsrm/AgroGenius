@@ -31,6 +31,14 @@ public class LicencaVooController {
         model.addObject("licencas", listLicencaVoo);
         return model; 
     }
+    
+    @GetMapping("/usuario")
+    public ModelAndView getLicencasUsuario() {
+        ModelAndView model = new ModelAndView("licencavoo/usuario");
+        List<LicencaVoo> listLicencaVoo = licencaVooRepository.findAll();
+        model.addObject("licencas", listLicencaVoo);
+        return model; 
+    }
 
     @GetMapping("/create")
     public ModelAndView createLicenca() {

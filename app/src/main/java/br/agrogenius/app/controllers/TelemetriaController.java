@@ -37,6 +37,14 @@ public class TelemetriaController {
         model.addObject("telemetrias", listTelemetria);
         return model;
     }
+    
+    @GetMapping("/usuario")
+    public ModelAndView getTelemetriasUsuario() {
+        ModelAndView model = new ModelAndView("telemetria/usuario");
+        List<Telemetria> listTelemetria = telemetriaRepository.findAll();
+        model.addObject("telemetrias", listTelemetria);
+        return model;
+    }
 
     @GetMapping("/create")
     public ModelAndView createTelemetria() {

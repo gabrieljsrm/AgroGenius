@@ -36,6 +36,14 @@ public class HistoricoVooController {
         model.addObject("historicosVoo", listHistoricoVoo);
         return model;
     }
+    
+    @GetMapping("/usuario")
+    public ModelAndView getHistoricosVooUsuario() {
+        ModelAndView model = new ModelAndView("historicoVoo/usuario");
+        List<HistoricoVoo> listHistoricoVoo = historicoVooRepository.findAll();
+        model.addObject("historicosVoo", listHistoricoVoo);
+        return model;
+    }
 
     @GetMapping("/create")
     public ModelAndView createHistoricoVoo() {
