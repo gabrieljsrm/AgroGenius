@@ -84,40 +84,46 @@ h3 {
 
 	<div class="container-fluid">
 		<a type="button" class="btn btn-primary mt-3 mb-3"
-			href="/telemetria/create">Criar Telemetria</a>
+			href="/historicoVoo/create">Criar Histórico de Vôo</a>
 
 		<div class="table-responsive">
-			<h3>Dados da Telemetria</h3>
+			<h3>Dados dos Voos</h3>
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Id</th>
+						<th>Latitude Inicial</th>
+						<th>Longitude Inicial</th>
+						<th>Latitude Final</th>
+						<th>Longitude Final</th>
+						<th>Altitude Média</th>
+						<th>Velocidade Média</th>
+						<th>Data de Decolagem</th>
+						<th>Data de Aterrissagem</th>
 						<th>Drone</th>
-						<th>Data/Hora</th>
-						<th>Latitude</th>
-						<th>Longitude</th>
-						<th>Velocidade</th>
-						<th>Direção</th>
 						<th></th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="telemetria : ${telemetrias}">
-						<td th:text="${telemetria.id}"></td>
-						<td th:text="${telemetria.drone.modelo}"></td>
+					<tr th:each="historicoVoo : ${historicosVoo}">
+						<td th:text="${historicoVoo.id}"></td>
+						<td th:text="${historicoVoo.latitudeInicial}"></td>
+						<td th:text="${historicoVoo.longitudeInicial}"></td>
+						<td th:text="${historicoVoo.latitudeFinal}"></td>
+						<td th:text="${historicoVoo.longitudeFinal}"></td>
+						<td th:text="${historicoVoo.altitudeMedia}"></td>
+						<td th:text="${historicoVoo.velocidadeMedia}"></td>
 						<td
-							th:text="${#temporals.format(telemetria.dataHora, 'dd-MM-yyyy HH:mm')}"></td>
-						<td th:text="${telemetria.latitude}"></td>
-						<td th:text="${telemetria.longitude}"></td>
-						<td th:text="${telemetria.velocidade}"></td>
-						<td th:text="${telemetria.direcao}"></td>
+							th:text="${#temporals.format(historicoVoo.dataDecolagem, 'dd-MM-yyyy')}"></td>
+						<td
+							th:text="${#temporals.format(historicoVoo.dataAterrisagem, 'dd-MM-yyyy')}"></td>
+						<td th:text="${historicoVoo.drone?.numeroSerie}"></td>
 						<td><a
-							th:href="@{/telemetria/delete/{telemetriaId}(telemetriaId=${telemetria.id})}">Deletar</a></td>
+							th:href="@{/historicoVoo/delete/{historicoVooId}(historicoVooId=${historicoVoo.id})}">Deletar</a></td>
 						<td><a
-							th:href="@{/telemetria/edit/{telemetriaId}(telemetriaId=${telemetria.id})}">Editar</a></td>
+							th:href="@{/historicoVoo/edit/{historicoVooId}(historicoVooId=${historicoVoo.id})}">Editar</a></td>
 					</tr>
-
 				</tbody>
 			</table>
 		</div>

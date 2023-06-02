@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Editar Histórico de Vôo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+body {
+	background-color: #f5f5f5;
+}
+.navbar {
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.nav-link {
+	font-weight: bold;
+}
+.nav-item:hover {
+	background-color: #343a40;
+}
+.nav-link:hover {
+	color: #f8f9fa;
+}
+h2 {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	text-align: center;
+	font-weight: bold;
+}
+form {
+	background-color: #ffffff;
+	padding: 2rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 1rem;
+}
+input[type="submit"] {
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Agrogenius</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/licencavoo">Cadastro Licença de Vôo</a></li>
+					<li class="nav-item"><a class="nav-link" href="/drone">Cadastro Drone</a></li>
+					<li class="nav-item"><a class="nav-link" href="/telemetria">Cadastro Telemetria</a></li>
+					<li class="nav-item"><a class="nav-link" href="/historicoVoo">Cadastro Histórico de Vôo</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container mt-5">
+		<h2 class="text-center">Editar Histórico de Vôo</h2>
+		<form th:action="@{/historicoVoo/edit/{id}(id=${historicoVoo.id})}" method="post" onsubmit="return validarForm()" th:object="${historicoVoo}">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token != null ? _csrf.token : ''}" />
+			<div class="mb-3">
+				<label for="latitudeInicial">Latitude Inicial:</label> 
+				<input type="number" step="any" class="form-control" name="latitudeInicial" id="latitudeInicial" required th:value="${historicoVoo.latitudeInicial}" />
+			</div>
+			<div class="mb-3">
+				<label for="longitudeInicial">Longitude Inicial:</label> 
+				<input type="number" step="any" class="form-control" name="longitudeInicial" id="longitudeInicial" required th:value="${historicoVoo.longitudeInicial}" />
+			</div>
+			<div class="mb-3">
+				<label for="latitudeFinal">Latitude Final:</label> 
+				<input type="number" step="any" class="form-control" name="latitudeFinal" id="latitudeFinal" required th:value="${historicoVoo.latitudeFinal}" />
+			</div>
+			<div class="mb-3">
+				<label for="longitudeFinal">Longitude Final:</label> 
+				<input type="number" step="any" class="form-control" name="longitudeFinal" id="longitudeFinal" required th:value="${historicoVoo.longitudeFinal}" />
+			</div>
+			<div class="mb-3">
+				<label for="altitudeMedia">Altitude Média:</label> 
+				<input type="number" step="any" class="form-control" name="altitudeMedia" id="altitudeMedia" required th:value="${historicoVoo.altitudeMedia}" />
+			</div>
+			<div class="mb-3">
+				<label for="velocidadeMedia">Velocidade Média:</label> 
+				<input type="number" step="any" class="form-control" name="velocidadeMedia" id="velocidadeMedia" required th:value="${historicoVoo.velocidadeMedia}" />
+			</div>
+			<div class="mb-3">
+				<label for="dataDecolagem">Data de Decolagem:</label> 
+				<input type="date" class="form-control" name="dataDecolagem" id="dataDecolagem" required th:value="${historicoVoo.dataDecolagem}" />
+			</div>
+			<div class="mb-3">
+				<label for="dataAterrisagem">Data de Aterrisagem:</label> 
+				<input type="date" class="form-control" name="dataAterrisagem" id="dataAterrisagem" required th:value="${historicoVoo.dataAterrisagem}" />
+			</div>
+			<div class="mb-3">
+				<label for="droneId">Drone:</label> 
+				<select class="form-control" name="droneId" id="droneId" required>
+					<option value="">--Selecione um Drone--</option>
+					<option th:each="drone : ${drones}" th:value="${drone.id}" th:text="${drone.modelo}" th:selected="${drone.id == historicoVoo.droneId}"></option>
+				</select>
+			</div>
+			<input type="submit" class="btn btn-primary" value="Salvar" />
+		</form>
+	</div>
+
+	<script>
+		function validarForm() {
+			var latitudeInicial = document.getElementById("latitudeInicial").value;
+			var longitudeInicial = document.getElementById("longitudeInicial").value;
+			var latitudeFinal = document.getElementById("latitudeFinal").value;
+			var longitudeFinal = document.getElementById("longitudeFinal").value;
+			var altitudeMedia = document.getElementById("altitudeMedia").value;
+			var velocidadeMedia = document.getElementById("velocidadeMedia").value;
+			var dataDecolagem = document.getElementById("dataDecolagem").value;
+			var dataAterrisagem = document.getElementById("dataAterrisagem").value;
+			var droneId = document.getElementById("droneId").value;
+
+			if (!latitudeInicial || !longitudeInicial || !latitudeFinal || !longitudeFinal || !altitudeMedia || !velocidadeMedia || !dataDecolagem || !dataAterrisagem || !droneId) {
+				alert("Todos os campos são obrigatórios!");
+				return false;
+			}
+			return true;
+		}
+	</script>
+</body>
+</html>

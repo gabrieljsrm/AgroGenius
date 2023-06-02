@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -15,32 +17,49 @@ public class HistoricoVoo {
 	@GeneratedValue(strategy = GenerationType.AUTO) // auto increment
 	private Long id;
 	
-	@NotNull(message = "O Drone é obrigatório!")
-	private Long droneId;
+	@ManyToOne
+	@JoinColumn(name = "drone_id")
+	private Drone drone;
 	
 	@NotNull(message = "A Latitude Inicial é obrigatório!")
-	private Long latitudeInicial;
+	private Double latitudeInicial;
 	
 	@NotNull(message = "A Longitude Inicial é obrigatório!")
-	private Long longitudeInicial;
+	private Double longitudeInicial;
 	
 	@NotNull(message = "A Latitude Final é obrigatório!")
-	private Long latitudeFinal;
+	private Double latitudeFinal;
 	
 	@NotNull(message = "A Longitude Final é obrigatório!")
-	private Long longitudeFinal;
+	private Double longitudeFinal;
 	
 	@NotNull(message = "A Altitude Média é obrigatório!")
-	private Long altitudeMedia;
+	private Double altitudeMedia;
 	
 	@NotNull(message = "A Velocidade Média é obrigatório!")
-	private Long velocidadeMedia;
+	private Double velocidadeMedia;
 		
 	@NotNull(message = "A Data de Decolagem é obrigatório!")
 	private LocalDate dataDecolagem;
 	
 	@NotNull(message = "A Data de Aterrisagem é obrigatório!")
 	private LocalDate dataAterrisagem;
+
+	public Long getDroneId() {
+		if (drone != null) {
+			return drone.getId();
+		}
+		return null;
+	}
+
+	public void setDroneId(Long droneId) {
+		if (droneId != null) {
+			Drone drone = new Drone();
+			drone.setId(droneId);
+			this.drone = drone;
+		}
+
+	}
 
 	public Long getId() {
 		return id;
@@ -50,59 +69,59 @@ public class HistoricoVoo {
 		this.id = id;
 	}
 
-	public Long getDroneId() {
-		return droneId;
+	public Drone getDrone() {
+		return drone;
 	}
 
-	public void setDroneId(Long droneId) {
-		this.droneId = droneId;
+	public void setDrone(Drone drone) {
+		this.drone = drone;
 	}
 
-	public Long getLatitudeInicial() {
+	public Double getLatitudeInicial() {
 		return latitudeInicial;
 	}
 
-	public void setLatitudeInicial(Long latitudeInicial) {
+	public void setLatitudeInicial(Double latitudeInicial) {
 		this.latitudeInicial = latitudeInicial;
 	}
 
-	public Long getLongitudeInicial() {
+	public Double getLongitudeInicial() {
 		return longitudeInicial;
 	}
 
-	public void setLongitudeInicial(Long longitudeInicial) {
+	public void setLongitudeInicial(Double longitudeInicial) {
 		this.longitudeInicial = longitudeInicial;
 	}
 
-	public Long getLatitudeFinal() {
+	public Double getLatitudeFinal() {
 		return latitudeFinal;
 	}
 
-	public void setLatitudeFinal(Long latitudeFinal) {
+	public void setLatitudeFinal(Double latitudeFinal) {
 		this.latitudeFinal = latitudeFinal;
 	}
 
-	public Long getLongitudeFinal() {
+	public Double getLongitudeFinal() {
 		return longitudeFinal;
 	}
 
-	public void setLongitudeFinal(Long longitudeFinal) {
+	public void setLongitudeFinal(Double longitudeFinal) {
 		this.longitudeFinal = longitudeFinal;
 	}
 
-	public Long getAltitudeMedia() {
+	public Double getAltitudeMedia() {
 		return altitudeMedia;
 	}
 
-	public void setAltitudeMedia(Long altitudeMedia) {
+	public void setAltitudeMedia(Double altitudeMedia) {
 		this.altitudeMedia = altitudeMedia;
 	}
 
-	public Long getVelocidadeMedia() {
+	public Double getVelocidadeMedia() {
 		return velocidadeMedia;
 	}
 
-	public void setVelocidadeMedia(Long velocidadeMedia) {
+	public void setVelocidadeMedia(Double velocidadeMedia) {
 		this.velocidadeMedia = velocidadeMedia;
 	}
 
@@ -121,6 +140,6 @@ public class HistoricoVoo {
 	public void setDataAterrisagem(LocalDate dataAterrisagem) {
 		this.dataAterrisagem = dataAterrisagem;
 	}
-
+	
 	
 }
