@@ -125,7 +125,7 @@ input[type="submit"] {
 			<input type="submit" class="btn btn-primary" value="Salvar" />
 		</form>
 	</div>
-	<script>
+<script>
     function validarForm() {
         var latitudeInicial = document.getElementById("latitudeInicial").value;
         var longitudeInicial = document.getElementById("longitudeInicial").value;
@@ -133,8 +133,10 @@ input[type="submit"] {
         var longitudeFinal = document.getElementById("longitudeFinal").value;
         var altitudeMedia = document.getElementById("altitudeMedia").value;
         var velocidadeMedia = document.getElementById("velocidadeMedia").value;
+        var dataDecolagem = document.getElementById("dataDecolagem").value;
+        var dataAterrisagem = document.getElementById("dataAterrisagem").value;
 
-        if (!latitudeInicial || !longitudeInicial || !latitudeFinal || !longitudeFinal || !altitudeMedia || !velocidadeMedia) {
+        if (!latitudeInicial || !longitudeInicial || !latitudeFinal || !longitudeFinal || !altitudeMedia || !velocidadeMedia || !dataDecolagem || !dataAterrisagem) {
             alert("Todos os campos são obrigatórios!");
             return false;
         }
@@ -171,9 +173,18 @@ input[type="submit"] {
             return false;
         }
 
+        var dataDecolagemObj = new Date(dataDecolagem);
+        var dataAterrisagemObj = new Date(dataAterrisagem);
+
+        if (dataAterrisagemObj < dataDecolagemObj) {
+            alert("Data de aterrisagem inválida! A data de aterrisagem não pode ser menor que a data de decolagem.");
+            return false;
+        }
+
         return true;
     }
 </script>
+
 
 
 </body>

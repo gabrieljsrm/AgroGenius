@@ -78,7 +78,7 @@ input[type="submit"] {
     </nav>
 	<div class="container mt-5">
 		<h2>Cadastrar Licença de Voo</h2>
-		<form action="/licencavoo/create" method="post">
+		<form action="/licencavoo/create" method="post" onsubmit="return validarForm()">
 			<div class="mb-3">
 				<label for="licencavoo">Número da Licença:</label> <input
 					type="text" class="form-control" name="licencavoo" id="licencavoo"
@@ -98,18 +98,28 @@ input[type="submit"] {
 		</form>
 	</div>
 	<script>
-		function validarForm() {
-			var licencavoo = document.getElementById("licencavoo").value;
-			var dataEmissao = document.getElementById("dataEmissao").value;
-			var dataValidade = document.getElementById("dataValidade").value;
+    function validarForm() {
+        var licencavoo = document.getElementById("licencavoo").value;
+        var dataEmissao = document.getElementById("dataEmissao").value;
+        var dataValidade = document.getElementById("dataValidade").value;
 
-			if (!licencavoo || !dataEmissao || !dataValidade) {
-				alert("Todos os campos são obrigatórios!");
-				return false;
-			}
-			return true;
-		}
-	</script>
+        if (!licencavoo || !dataEmissao || !dataValidade) {
+            alert("Todos os campos são obrigatórios!");
+            return false;
+        }
+
+        var dataEmissaoObj = new Date(dataEmissao);
+        var dataValidadeObj = new Date(dataValidade);
+
+        if (dataValidadeObj <= dataEmissaoObj) {
+            alert("Data de validade inválida! A data de validade deve ser maior do que a data de emissão.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
 
 </body>
 
