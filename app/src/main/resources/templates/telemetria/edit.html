@@ -109,12 +109,12 @@ input[type="submit"] {
 					id="longitude" required th:value="${telemetria.longitude}" />
 			</div>
 			<div class="mb-3">
-				<label for="velocidade">Velocidade:</label> <input type="number"
+				<label for="velocidade">Velocidade (m/s):</label> <input type="number"
 					class="form-control" name="velocidade" id="velocidade" required
 					th:value="${telemetria.velocidade}" />
 			</div>
 			<div class="mb-3">
-				<label for="direcao">Direção:</label> <input type="text"
+				<label for="direcao">Direção (°):</label> <input type="text"
 					class="form-control" name="direcao" id="direcao" required
 					th:value="${telemetria.direcao}" />
 			</div>
@@ -122,20 +122,56 @@ input[type="submit"] {
 		</form>
 	</div>
 
-	<script>
-		function validarForm() {
-			var droneId = document.getElementById("droneId").value;
-			var latitude = document.getElementById("latitude").value;
-			var longitude = document.getElementById("longitude").value;
-			var velocidade = document.getElementById("velocidade").value;
-			var direcao = document.getElementById("direcao").value;
+		<script>
+    function validarForm() {
+        var droneId = document.getElementById("droneId").value;
 
-			if (!droneId || !latitude || !longitude || !velocidade || !direcao) {
-				alert("Todos os campos são obrigatórios!");
-				return false;
-			}
-			return true;
-		}
-	</script>
+        var latitude = document.getElementById("latitude").value;
+        var longitude = document.getElementById("longitude").value;
+        var velocidade = document.getElementById("velocidade").value;
+        var direcao = document.getElementById("direcao").value;
+
+        if (!droneId || !latitude || !longitude || !velocidade || !direcao) {
+            alert("Todos os campos são obrigatórios!");
+            return false;
+        }
+
+        // Validação da latitude
+        var latitudeRegex = /^-?([0-9]{1,2}|[0-8][0-9]|90)(\.[0-9]{1,6})?$/;
+        if (!latitudeRegex.test(latitude)) {
+            alert("Latitude inválida! Insira um valor válido para latitude.");
+            return false;
+        }
+
+        // Validação da longitude
+        var longitudeRegex = /^-?([0-9]{1,2}|[0-9]{1,2}[0-9]|1[0-7][0-9]|180)(\.[0-9]{1,6})?$/;
+        if (!longitudeRegex.test(longitude)) {
+            alert("Longitude inválida! Insira um valor válido para longitude.");
+            return false;
+        }
+
+        if (latitude < -90 || latitude > 90) {
+            alert("Latitude inválida! Insira um valor entre -90 e 90.");
+            return false;
+        }
+
+        if (longitude < -180 || longitude > 180) {
+            alert("Longitude inválida! Insira um valor entre -180 e 180.");
+            return false;
+        }
+
+        if (velocidade < 0) {
+            alert("Velocidade inválida! Insira um valor positivo.");
+            return false;
+        }
+
+        if (direcao < 0 || direcao > 360) {
+            alert("Direção inválida! Insira um valor entre 0 e 360.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 </body>
 </html>
