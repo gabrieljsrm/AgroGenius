@@ -63,14 +63,14 @@ public class LicencaVooController {
     public String deleteLicenca(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         LicencaVoo licencaVoo = licencaVooRepository.findById(id).orElse(null);
 
-        // Verificar se a licença está sendo usada por algum drone
+       
         List<Drone> dronesComLicenca = droneRepository.findByLicencaVoo(licencaVoo);
         if (!dronesComLicenca.isEmpty()) {
             redirectAttributes.addFlashAttribute("mensagem", "Não é possível excluir a licença porque está sendo usada por um drone.");
             return "redirect:/licencavoo";
         }
 
-        // Se a licença não estiver sendo usada por nenhum drone, excluí-la
+        
         licencaVooRepository.deleteById(id);
         return "redirect:/licencavoo";
     }

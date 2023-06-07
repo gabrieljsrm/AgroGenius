@@ -136,14 +136,14 @@ input[type="submit"] {
             return false;
         }
 
-        // Validação da latitude
+       
         var latitudeRegex = /^-?([0-9]{1,2}|[0-8][0-9]|90)(\.[0-9]{1,6})?$/;
         if (!latitudeRegex.test(latitude)) {
             alert("Latitude inválida! Insira um valor válido para latitude.");
             return false;
         }
 
-        // Validação da longitude
+      
         var longitudeRegex = /^-?([0-9]{1,2}|[0-9]{1,2}[0-9]|1[0-7][0-9]|180)(\.[0-9]{1,6})?$/;
         if (!longitudeRegex.test(longitude)) {
             alert("Longitude inválida! Insira um valor válido para longitude.");

@@ -98,7 +98,7 @@ public class HistoricoVooController {
             historicoVooExistente.setDataDecolagem(historicoVooAtualizado.getDataDecolagem());
             historicoVooExistente.setDataAterrisagem(historicoVooAtualizado.getDataAterrisagem());
             
-            // Atualiza o drone do historicoVoo existente
+            
             Drone drone = droneRepository.getById(droneId);
             historicoVooExistente.setDrone(drone);
             

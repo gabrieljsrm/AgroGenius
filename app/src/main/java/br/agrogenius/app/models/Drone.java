@@ -92,7 +92,7 @@ public class Drone {
         this.capacidadeCarga = capacidadeCarga;
     }
 
-    // Getter e Setter para licencaVooId
+    
     public Long getLicencaVooId() {
         if (licencaVoo != null) {
             return licencaVoo.getId();

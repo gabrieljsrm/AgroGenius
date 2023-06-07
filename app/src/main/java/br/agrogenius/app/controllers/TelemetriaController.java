@@ -67,7 +67,7 @@ public class TelemetriaController {
         }
 
         telemetria.setDrone(drone);
-        telemetria.setDataHora(LocalDateTime.now());  // Adição da data e hora atuais
+        telemetria.setDataHora(LocalDateTime.now());  
         telemetriaRepository.save(telemetria);
         return "redirect:/telemetria";
     }
